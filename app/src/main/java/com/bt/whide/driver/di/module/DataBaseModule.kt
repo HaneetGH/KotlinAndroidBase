@@ -1,12 +1,9 @@
 package com.bt.whide.driver.di.module
 
-import android.content.Context
-import android.content.SharedPreferences
 import androidx.room.Room
 import com.bt.whide.driver.constants.DatabaseConstants
-import com.bt.whide.driver.constants.Preferences
-import com.bt.whide.driver.data.repository.database.WhideDatabase
-import com.bt.whide.driver.data.repository.database.dao.UserMasterDao
+import com.bt.whide.driver.data.tunnel.database.WhideDatabase
+import com.bt.whide.driver.data.tunnel.database.dao.UserMasterDao
 import com.bt.whide.driver.di.App
 import com.bt.whide.driver.di.scopes.ApplicationScoped
 import dagger.Module

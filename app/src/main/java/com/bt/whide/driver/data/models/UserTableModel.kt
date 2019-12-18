@@ -1,10 +1,9 @@
-package com.bt.whide.driver.data.repository.models
+package com.bt.whide.driver.data.models
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
-import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
-import com.bt.whide.driver.data.repository.models.base.BaseDaoModel
+import com.bt.whide.driver.data.models.base.BaseDaoModel
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 

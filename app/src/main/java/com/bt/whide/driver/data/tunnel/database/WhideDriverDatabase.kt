@@ -1,11 +1,11 @@
-package com.bt.whide.driver.data.repository.database
+package com.bt.whide.driver.data.tunnel.database
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
-import com.bt.whide.driver.data.repository.database.dao.UserMasterDao
-import com.bt.whide.driver.data.repository.models.UserTableModel
-import com.bt.whide.driver.data.repository.utils.RoomConverters
+import com.bt.whide.driver.data.tunnel.database.dao.UserMasterDao
+import com.bt.whide.driver.data.models.UserTableModel
+import com.bt.whide.driver.data.utils.RoomConverters
 
 @Database(
     entities = arrayOf(UserTableModel::class),

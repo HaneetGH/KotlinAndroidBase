@@ -1,8 +1,7 @@
-package com.bt.whide.driver.data.repository.database.dao
+package com.bt.whide.driver.data.tunnel.database.dao
 
 import androidx.room.*
-import com.bt.whide.driver.data.repository.models.UserTableModel
-import io.reactivex.Single
+import com.bt.whide.driver.data.models.UserTableModel
 
 @Dao
 abstract class UserMasterDao {

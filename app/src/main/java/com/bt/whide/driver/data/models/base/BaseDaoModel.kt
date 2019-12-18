@@ -1,9 +1,9 @@
-package com.bt.whide.driver.data.repository.models.base
+package com.bt.whide.driver.data.models.base
 
 import androidx.databinding.BaseObservable
 import androidx.room.ColumnInfo
 import androidx.room.TypeConverters
-import com.bt.whide.driver.data.repository.utils.TimestampConverter
+import com.bt.whide.driver.data.utils.TimestampConverter
 import com.google.gson.annotations.Expose
 import java.io.Serializable
 import java.util.*

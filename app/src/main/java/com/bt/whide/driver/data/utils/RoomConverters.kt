@@ -1,4 +1,4 @@
-package com.bt.whide.driver.data.repository.utils
+package com.bt.whide.driver.data.utils
 
 import androidx.room.TypeConverter
 import java.util.*
