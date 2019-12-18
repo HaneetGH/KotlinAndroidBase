@@ -38,5 +38,5 @@ class App : Application(), HasActivityInjector {
         return dispatchingAndroidInjector
     }
 
-    
+
 }

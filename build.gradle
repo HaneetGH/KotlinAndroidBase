@@ -22,7 +22,10 @@ allprojects {
         maven { url 'https://jitpack.io' }
     }
 }
-
+buildscript {
+    ext.daggerVersion = '2.15'
+    ext.room_version = '2.1.0-alpha01'
+}
 task clean(type: Delete) {
     delete rootProject.buildDir
 }

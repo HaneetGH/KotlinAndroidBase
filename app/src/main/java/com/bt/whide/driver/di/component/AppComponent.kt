@@ -3,6 +3,7 @@ package com.bt.whide.driver.di.component
 import com.bt.whide.driver.di.App
 import com.bt.whide.driver.di.builder.ActivityBuilder
 import com.bt.whide.driver.di.module.AppModule
+import com.bt.whide.driver.di.module.DataBaseModule
 import com.bt.whide.driver.di.module.PreferenceModule
 import com.bt.whide.driver.di.scopes.ApplicationScoped
 import com.bt.whide.driver.helpers.AppPrefs
@@ -18,6 +19,7 @@ import javax.inject.Singleton
     arrayOf(AndroidSupportInjectionModule::class,
         AppModule::class,
         PreferenceModule::class,
+        DataBaseModule::class,
         ActivityBuilder::class)
 )
 interface AppComponent {
