@@ -1,6 +1,6 @@
 package com.bt.whide.driver.di.builder
 
-import com.bt.whide.driver.MainActivity
+import com.bt.whide.driver.ui.onboarding.activity.MainActivity
 import com.bt.whide.driver.di.scopes.ActivityScoped
 import dagger.Module
 

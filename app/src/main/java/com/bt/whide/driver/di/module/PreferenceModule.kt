@@ -2,9 +2,8 @@ package com.bt.whide.driver.di.module
 
 import android.content.Context
 import android.content.SharedPreferences
-import androidx.annotation.NonNull
 import com.bt.whide.driver.constants.Preferences
-import com.bt.whide.driver.di.App
+import com.bt.whide.driver.application.App
 import com.bt.whide.driver.di.scopes.ApplicationScoped
 
 import com.bt.whide.driver.helpers.AppPrefs

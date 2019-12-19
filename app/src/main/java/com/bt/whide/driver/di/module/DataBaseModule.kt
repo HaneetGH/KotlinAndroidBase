@@ -4,7 +4,7 @@ import androidx.room.Room
 import com.bt.whide.driver.constants.DatabaseConstants
 import com.bt.whide.driver.data.tunnel.database.WhideDatabase
 import com.bt.whide.driver.data.tunnel.database.dao.UserMasterDao
-import com.bt.whide.driver.di.App
+import com.bt.whide.driver.application.App
 import com.bt.whide.driver.di.scopes.ApplicationScoped
 import dagger.Module
 import dagger.Provides

@@ -1,68 +1,64 @@
-package com.bt.whide.driver.di
+package com.bt.app.di
 
 import android.app.Activity
-import android.app.Application.ActivityLifecycleCallbacks
+import android.app.Application
 import android.os.Bundle
-
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
+import androidx.fragment.app.FragmentManager
 
 import dagger.android.AndroidInjection
 import dagger.android.support.AndroidSupportInjection
 import dagger.android.support.HasSupportFragmentInjector
 
-class AppInjector() {
 
-    // Static Methods
-    companion object{
-        fun init(letstrackApp: App) {
-            letstrackApp.registerActivityLifecycleCallbacks(object : ActivityLifecycleCallbacks {
-                override fun onActivityCreated(activity: Activity, savedInstanceState: Bundle) {
-                    handleActivity(activity)
-                }
+interface Injectable
 
-                override fun onActivityStarted(activity: Activity) { //do nothing
-                }
+fun Application.applyAutoInjector() = registerActivityLifecycleCallbacks(
+    object : Application.ActivityLifecycleCallbacks {
 
-                override fun onActivityResumed(activity: Activity) { //do nothing
-                }
-
-                override fun onActivityPaused(activity: Activity) { //do nothing
-                }
-
-                override fun onActivityStopped(activity: Activity) { //do nothing
-                }
-
-                override fun onActivitySaveInstanceState(
-                    activity: Activity,
-                    outState: Bundle
-                ) { //do nothing
-                }
-
-                override fun onActivityDestroyed(activity: Activity) { //do nothing
-                }
-            })
+        override fun onActivityCreated(activity: Activity, savedInstanceState: Bundle?) {
+            handleActivity(activity)
         }
-        private fun handleActivity(activity: Activity) {
-            if (activity is HasSupportFragmentInjector) {
-                AndroidInjection.inject(activity)
-            }
-            /*if (activity is FragmentActivity) {
-                activity.supportFragmentManager
-                    .registerFragmentLifecycleCallbacks(
-                        object : FragmentManager.FragmentLifecycleCallbacks() {
-                            override fun onFragmentCreated(
-                                fm: FragmentManager,
-                                f: Fragment,
-                                savedInstanceState: Bundle?
-                            ) {
-                                if (f is Injectable) {
-                                    AndroidSupportInjection.inject(f)
-                                }
-                            }
-                        }, true
-                    )
-            }*/
+
+        override fun onActivityStarted(activity: Activity) {
+
         }
+
+        override fun onActivityResumed(activity: Activity) {
+
+        }
+
+        override fun onActivityPaused(activity: Activity) {
+
+        }
+
+        override fun onActivityStopped(activity: Activity) {
+
+        }
+
+        override fun onActivitySaveInstanceState(activity: Activity, outState: Bundle?) {
+
+        }
+
+        override fun onActivityDestroyed(activity: Activity) {
+
+        }
+    })
+
+private fun handleActivity(activity: Activity) {
+    if (activity is Injectable || activity is HasSupportFragmentInjector) {
+        AndroidInjection.inject(activity)
     }
-
-
+    if (activity is FragmentActivity) {
+        activity.supportFragmentManager.registerFragmentLifecycleCallbacks(
+            object : FragmentManager.FragmentLifecycleCallbacks() {
+                override fun onFragmentCreated(fm: FragmentManager, f: Fragment, s: Bundle?) {
+                    if (f is Injectable) {
+                        AndroidSupportInjection.inject(f)
+                    }
+                }
+            }, true
+        )
+    }
 }

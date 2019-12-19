@@ -1,11 +1,19 @@
 package com.bt.whide.driver.global
 
+import android.widget.ImageView
+import androidx.databinding.BindingAdapter
+import com.bt.whide.driver.R
+import com.squareup.picasso.Picasso
 
 
+class CustomBindingAdapter(private val picasso: Picasso) {
 
-class CustomBindingAdapter() {
-/*
-    private var picasso: Picasso? = null
-    fun CustomBindingAdapter(mpicasso: Picasso?) { this.picasso = mpicasso }
-*/
+   /* @BindingAdapter("android:src_url")
+    fun loadImage(view: ImageView, url: String?) {
+        if (url == null || url.equals("", ignoreCase = true)) {
+            view.setImageResource(R.mipmap.ic_launcher)
+            return
+        }
+        picasso.load(url).error(R.mipmap.ic_launcher).fit().into(view)
+    }*/
 }

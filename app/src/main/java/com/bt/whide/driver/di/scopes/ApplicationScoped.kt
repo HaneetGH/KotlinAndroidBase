@@ -5,7 +5,7 @@ import java.lang.annotation.Retention
 import java.lang.annotation.RetentionPolicy
 import javax.inject.Scope
 
-@Documented
+@kotlin.annotation.MustBeDocumented
 @Scope
-@Retention(RetentionPolicy.RUNTIME)
+@kotlin.annotation.Retention
 annotation class ApplicationScoped
