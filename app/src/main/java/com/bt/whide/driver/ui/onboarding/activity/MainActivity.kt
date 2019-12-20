@@ -1,18 +1,18 @@
 package com.bt.whide.driver.ui.onboarding.activity
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import com.bt.whide.driver.R
 import com.bt.whide.driver.data.tunnel.database.dao.UserMasterDao
 import com.bt.whide.driver.helpers.AppPrefs
 import com.bt.whide.driver.ui.base.BaseActivity
-import dagger.android.AndroidInjector
-import dagger.android.support.DaggerAppCompatActivity
 import javax.inject.Inject
 
 class MainActivity : BaseActivity() {
-
+    @Inject
+    lateinit var context: Context
     @Inject
     lateinit var sharedPreferences: AppPrefs
 

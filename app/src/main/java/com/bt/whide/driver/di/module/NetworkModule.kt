@@ -3,7 +3,7 @@ package com.bt.whide.driver.di.module
 import android.app.Application
 import android.os.Build
 import androidx.annotation.RequiresApi
-import com.bt.whide.driver.data.tunnel.remote.utils.CheckInternetConnection
+import com.bt.whide.driver.data.tunnel.remote.SynchronousApi
 import com.bt.whide.driver.di.scopes.ApplicationScoped
 import com.bt.whide.driver.helpers.AppPrefs
 import com.franmontiel.persistentcookiejar.PersistentCookieJar
@@ -15,14 +15,17 @@ import com.google.gson.GsonBuilder
 import dagger.Module
 import dagger.Provides
 import io.reactivex.schedulers.Schedulers
-import okhttp3.*
+import okhttp3.Cache
+import okhttp3.CookieJar
+import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
+import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.converter.moshi.MoshiConverterFactory
 import java.net.CookieHandler
 import java.net.CookieManager
 import java.net.CookiePolicy
-import java.util.concurrent.TimeUnit
 import javax.inject.Named
 
 @Module
@@ -38,9 +41,22 @@ class NetworkModule {
 
     @Provides
     @Named(LT_BASE_URL)
-    fun provideBaseUrlString(preference: AppPrefs?): String? {
+    fun provideBaseUrlString(): String {
         return BASE_URL
-        //return preference.getBaseUrl();
+
+    }
+
+
+
+
+    @Provides
+    @ApplicationScoped
+    internal fun provideRetrofitInterface(): Retrofit {
+        return Retrofit.Builder()
+            .baseUrl(BASE_URL)
+            .addConverterFactory(MoshiConverterFactory.create())
+            .addCallAdapterFactory(RxJava2CallAdapterFactory.createWithScheduler(Schedulers.io()))
+            .build()
     }
 
 
@@ -66,74 +82,12 @@ class NetworkModule {
         return HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
     }
 
-  /*  @Provides
+    @Provides
     @ApplicationScoped
-    fun provideHeaderAuthorizationInterceptor(
-        @Named(TOKEN) token: String, connection: CheckInternetConnection
-    ): Interceptor? { //  final String authToken = Credentials.basic("Letstrack", "LTS@NowInIndia");
-        return label@ Interceptor { chain: Interceptor.Chain ->
-            *//*  Request request = chain.request();
-                Request.Builder requestBuilder = request.newBuilder()
-                        .addHeader("Authorization", "Bearer " + token);
-
-                request = requestBuilder.build();
-                Response response = chain.proceed(request);
-
-
-
-                if (response.code() == 401) {
-
-                    return response;
-                }*//*
-            var request = chain.request()
-            val requestBuilder = request.newBuilder()
-            //  .addHeader("Authorization", "Bearer " + token);
-            val cacheControl = CacheControl.Builder()
-                .maxAge(40, TimeUnit.SECONDS)
-                .build()
-            if (true) {
-                val maxAge = 20 // read from cache for 1 minute
-                request.newBuilder()
-                    .addHeader("Authorization", "Bearer $token")
-                    .header("Cache-Control", "public, max-age=$maxAge")
-                    .cacheControl(cacheControl)
-                    .build()
-            } else {
-                val maxStale = 60 * 60 * 24 * 28 // tolerate 4-weeks stale
-                request.newBuilder()
-                    .header("Cache-Control", "public, only-if-cached, max-stale=$maxStale")
-                    .build()
-            }
-            request = requestBuilder.build()
-            val response = chain.proceed(request)
-            if (response.code() == 401) {
-                return@label response
-            }
-            response
-        }
-    }*/
-
-
-    /*@Provides
-    @ApplicationScoped
-    fun provideOkHttpClient(
-        cookieJar: CookieJar?,
-        loggingInterceptor: HttpLoggingInterceptor?,
-        headerAuthorizationInterceptor: Interceptor?,
-        cache: Cache?
-    ): OkHttpClient? {
-        return OkHttpClient.Builder()
-            .addInterceptor(loggingInterceptor)
-            .addInterceptor(headerAuthorizationInterceptor)
-            .connectTimeout(
-                TIMEOUT_IN_MS.toLong(),
-                TimeUnit.MILLISECONDS
-            )
-            .cookieJar(cookieJar)
-            .cache(cache)
-            .build()
+    fun provideWhideService(@Named(LT_BASE_URL) baseUrl: String): SynchronousApi {
+        return Retrofit.Builder().baseUrl(baseUrl).build().create(SynchronousApi::class.java)
     }
-*/
+
     @Provides
     @ApplicationScoped
     fun provideGson(): Gson? {

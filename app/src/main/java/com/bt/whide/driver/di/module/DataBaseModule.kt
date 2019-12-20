@@ -13,17 +13,6 @@ import dagger.Provides
 class DataBaseModule {
 
 
-/*    @ApplicationScoped
-    @Provides
-    fun provideWDDatabase(context: Context?): WhideDatabase? {
-        return Room.databaseBuilder(
-            context!!.applicationContext,
-            WhideDatabase::class.java, DatabaseConstants.DB_NAME
-        )
-            .fallbackToDestructiveMigration() *//*.allowMainThreadQueries()*//*
-            .build()
-    }*/
-
     @Provides
     @ApplicationScoped
     fun provideWDDatabase(context: App): WhideDatabase {
