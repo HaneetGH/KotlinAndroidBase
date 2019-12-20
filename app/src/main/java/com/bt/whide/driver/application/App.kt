@@ -25,8 +25,8 @@ class App : MultiDexApplication(), HasActivityInjector, HasSupportFragmentInject
     @Inject
     lateinit var appComponent: AppComponent
 
-     @Inject
-     lateinit  var picasso: Picasso
+    @Inject
+    lateinit var picasso: Picasso
 
     @Inject
     lateinit var dispatchingAndroidInjector: DispatchingAndroidInjector<Activity>
@@ -41,13 +41,11 @@ class App : MultiDexApplication(), HasActivityInjector, HasSupportFragmentInject
             ?.appModule(AppModule(this))
             ?.build()
         appComponent.inject(this)
-
-          val bindingComponent: BindingComponent? = DaggerBindingComponent.builder()
-              ?.bindingModule(BindingModule())
-              ?.picasso(picasso)
-              ?.build()
-          DataBindingUtil.setDefaultComponent(bindingComponent)
-
+        val bindingComponent: BindingComponent? = DaggerBindingComponent.builder()
+            ?.bindingModule(BindingModule())
+            ?.picasso(picasso)
+            ?.build()
+        DataBindingUtil.setDefaultComponent(bindingComponent)
         applyAutoInjector()
     }
 

@@ -5,6 +5,12 @@ import android.content.SharedPreferences
 import com.bt.whide.driver.data.repository.MainActivityRepository
 import com.bt.whide.driver.ui.base.BaseViewModel
 import io.reactivex.schedulers.Schedulers
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import retrofit2.HttpException
+import timber.log.Timber
 import javax.inject.Inject
 
 class MainActivityViewModel @Inject constructor(
@@ -13,9 +19,8 @@ class MainActivityViewModel @Inject constructor(
 ) : BaseViewModel() {
 
 
-    fun getAllData() {
-        /*       addToDisposable(mainActivityRepository.getAllApi().subscribe(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()))
-        */
+     fun getAllData() {
+        mainActivityRepository.getAllApi()
     }
 
 }

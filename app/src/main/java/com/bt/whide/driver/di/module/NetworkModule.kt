@@ -12,6 +12,9 @@ import com.franmontiel.persistentcookiejar.persistence.SharedPrefsCookiePersisto
 import com.google.gson.FieldNamingPolicy
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
+import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
+import com.squareup.moshi.Moshi
+import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.Module
 import dagger.Provides
 import io.reactivex.schedulers.Schedulers
@@ -47,15 +50,17 @@ class NetworkModule {
     }
 
 
-
-
     @Provides
     @ApplicationScoped
-    internal fun provideRetrofitInterface(): Retrofit {
+    internal fun provideRetrofitInterface(okHttpClient: OkHttpClient): Retrofit {
         return Retrofit.Builder()
             .baseUrl(BASE_URL)
-            .addConverterFactory(MoshiConverterFactory.create())
-            .addCallAdapterFactory(RxJava2CallAdapterFactory.createWithScheduler(Schedulers.io()))
+
+            .addConverterFactory(MoshiConverterFactory.create(Moshi.Builder().add(
+                KotlinJsonAdapterFactory()
+            ).build()))
+
+            .client(okHttpClient)
             .build()
     }
 
