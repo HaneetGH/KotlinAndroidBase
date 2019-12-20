@@ -14,19 +14,16 @@ import okhttp3.OkHttpClient
 class AppModule(val application: App) {
 
 
-
-
     @Provides
     @ApplicationScoped
-    fun picasso(app: App?): Picasso? {
-        return Picasso.Builder(app!!.applicationContext)
-            .loggingEnabled(true)
-            .build()
+    fun picasso(
+        app: App
+
+    ): Picasso {
+        return Picasso.Builder(app.applicationContext).loggingEnabled(true).build()
     }
 
-
     @Provides
-    @ApplicationScoped
     fun okHttp3Downloader(okHttpClient: OkHttpClient?): OkHttp3Downloader? {
         return OkHttp3Downloader(okHttpClient)
     }
