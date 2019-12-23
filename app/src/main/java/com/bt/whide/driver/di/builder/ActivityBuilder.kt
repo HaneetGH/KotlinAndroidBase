@@ -12,4 +12,5 @@ internal abstract class ActivityBuilder {
     @ActivityScoped
     @ContributesAndroidInjector
     abstract fun bindMainActivity(): MainActivity?
+
 }
