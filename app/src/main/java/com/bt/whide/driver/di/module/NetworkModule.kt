@@ -3,6 +3,7 @@ package com.bt.whide.driver.di.module
 import android.app.Application
 import android.os.Build
 import androidx.annotation.RequiresApi
+import com.bt.whide.driver.constants.GlobalVariables
 import com.bt.whide.driver.data.tunnel.remote.SynchronousApi
 import com.bt.whide.driver.di.scopes.ApplicationScoped
 import com.bt.whide.driver.helpers.AppPrefs
@@ -20,6 +21,7 @@ import dagger.Provides
 import io.reactivex.schedulers.Schedulers
 import okhttp3.Cache
 import okhttp3.CookieJar
+import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -41,6 +43,19 @@ class NetworkModule {
         private val BASE_URL = "http://apicustomer.whide.com/api/"
     }
 
+    private val authInterceptor = Interceptor { chain ->
+        val newUrl = chain.request().url()
+            .newBuilder()
+            /* .addQueryParameter("api_key", GlobalVariables.TIME_STAMP_FORMAT)*/
+            .build()
+
+        val newRequest = chain.request()
+            .newBuilder()
+            .url(newUrl)
+            .build()
+
+        chain.proceed(newRequest)
+    }
 
     @Provides
     @Named(LT_BASE_URL)
@@ -52,16 +67,16 @@ class NetworkModule {
 
     @Provides
     @ApplicationScoped
-    internal fun provideRetrofitInterface(okHttpClient: OkHttpClient): Retrofit {
+    internal fun provideRetrofitInterface(
+        okHttpClient: OkHttpClient
+    ): Retrofit {
+
         return Retrofit.Builder()
             .baseUrl(BASE_URL)
+            .addConverterFactory(MoshiConverterFactory.create())
 
-            .addConverterFactory(MoshiConverterFactory.create(Moshi.Builder().add(
-                KotlinJsonAdapterFactory()
-            ).build()))
-
-            .client(okHttpClient)
             .build()
+
     }
 
 
@@ -89,8 +104,30 @@ class NetworkModule {
 
     @Provides
     @ApplicationScoped
+    fun okhttpclinet(): OkHttpClient? {
+        return OkHttpClient().newBuilder()
+            .addInterceptor(authInterceptor)
+            .build()
+    }
+
+    @Provides
+    @ApplicationScoped
+    fun provideMoshi(): MoshiConverterFactory {
+        return MoshiConverterFactory.create(Moshi.Builder().add(KotlinJsonAdapterFactory()).build())
+    }
+
+    @Provides
+    @ApplicationScoped
+    fun provideRxAdapter(): RxJava2CallAdapterFactory {
+        return RxJava2CallAdapterFactory
+            .createWithScheduler(Schedulers.io())
+    }
+
+    @Provides
+    @ApplicationScoped
     fun provideWhideService(@Named(LT_BASE_URL) baseUrl: String): SynchronousApi {
-        return Retrofit.Builder().baseUrl(baseUrl).build().create(SynchronousApi::class.java)
+        return Retrofit.Builder().baseUrl(baseUrl) .addConverterFactory(MoshiConverterFactory.create())
+            .addCallAdapterFactory(RxJava2CallAdapterFactory.createWithScheduler(Schedulers.io())).build().create(SynchronousApi::class.java)
     }
 
     @Provides

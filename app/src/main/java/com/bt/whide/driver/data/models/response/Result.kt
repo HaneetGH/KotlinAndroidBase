@@ -5,10 +5,10 @@ import com.google.gson.annotations.SerializedName
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
-
+@JsonClass(generateAdapter = true)
 data class Result(
-    @field:Json(name = "code")
-    private val code: Int? = null,
-    @field:Json(name = "msg")
-    private val msg: String? = null
+
+     val code: Int,
+
+     val msg: String
 ) {}
