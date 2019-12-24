@@ -44,6 +44,7 @@ class App : MultiDexApplication(), HasActivityInjector, HasSupportFragmentInject
             ?.appModule(AppModule(this))
             ?.build()
         appComponent.inject(this)
+        socket.connect()
         val bindingComponent: BindingComponent? = DaggerBindingComponent.builder()
             ?.bindingModule(BindingModule())
             ?.picasso(picasso)

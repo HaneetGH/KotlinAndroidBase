@@ -24,7 +24,7 @@ class CustomObserable : Observable<Any?>() {
     private fun doSocketIoThing(observer: Observer<in Any?>) {
 
         if (socket.isConnected) {
-            socket.request("heelow", "news");
+            socket.request("news", "WHIDE CONNECTED");
         }
     }
 

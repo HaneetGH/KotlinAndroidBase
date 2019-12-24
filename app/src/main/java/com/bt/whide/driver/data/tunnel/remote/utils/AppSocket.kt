@@ -26,17 +26,16 @@ class AppSocket(private val socket: Socket) {
         socket.close()
     }
 
-    fun request(name: String, any: Any): Completable =
+    fun request(name: String, any: Any) {
         if (isConnected)
-            Completable.fromCallable {
-                socket.emit(name, any)
-            }
-        else
-            Completable.error(SocketNotConnectedException())
+            socket.emit(name, any)
+
+    }
 
     fun on(name: String, listener: Emitter.Listener) {
         socket.on(name, listener)
     }
+
 
     fun addListener(listener: CommonListener) {
         listeners.add(listener)
