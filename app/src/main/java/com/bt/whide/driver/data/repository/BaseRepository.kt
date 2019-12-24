@@ -1,6 +1,8 @@
 package com.bt.whide.driver.data.repository
 
+
 import android.util.Log
+import com.squareup.picasso.Picasso
 import retrofit2.Response
 import java.io.IOException
 

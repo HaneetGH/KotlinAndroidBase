@@ -2,5 +2,7 @@
 <network-security-config>
     <domain-config cleartextTrafficPermitted="true">
         <domain includeSubdomains="true">apicustomer.whide.com</domain>
+    </domain-config> <domain-config cleartextTrafficPermitted="true">
+        <domain includeSubdomains="true">fc0f250b.ngrok.io</domain>
     </domain-config>
 </network-security-config>

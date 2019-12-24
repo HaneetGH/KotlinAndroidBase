@@ -45,7 +45,8 @@ class MainActivity : BaseActivity() {
             ).get(MainActivityViewModel::class.java)
         }
 
-        viewModel.getAllData();
+      //  viewModel.getAllData();
+        viewModel.customSocket()
 
 
     }

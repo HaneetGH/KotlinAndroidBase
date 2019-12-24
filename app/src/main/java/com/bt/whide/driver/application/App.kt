@@ -3,21 +3,22 @@
 package com.bt.whide.driver.application
 
 import android.app.Activity
-
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.multidex.MultiDexApplication
-
 import com.bt.app.di.applyAutoInjector
-
+import com.bt.whide.driver.data.tunnel.remote.utils.AppSocket
 import com.bt.whide.driver.di.component.AppComponent
 import com.bt.whide.driver.di.component.BindingComponent
 import com.bt.whide.driver.di.component.DaggerAppComponent
 import com.bt.whide.driver.di.component.DaggerBindingComponent
 import com.bt.whide.driver.di.module.AppModule
 import com.bt.whide.driver.di.module.BindingModule
+import com.github.nkzawa.socketio.client.Socket
 import com.squareup.picasso.Picasso
-import dagger.android.*
+import dagger.android.AndroidInjector
+import dagger.android.DispatchingAndroidInjector
+import dagger.android.HasActivityInjector
 import dagger.android.support.HasSupportFragmentInjector
 import javax.inject.Inject
 
@@ -33,6 +34,8 @@ class App : MultiDexApplication(), HasActivityInjector, HasSupportFragmentInject
 
     @Inject
     lateinit var dispatchingFragmentInjector: DispatchingAndroidInjector<Fragment>
+    @Inject
+    lateinit var socket: AppSocket
 
     override fun onCreate() {
         super.onCreate()

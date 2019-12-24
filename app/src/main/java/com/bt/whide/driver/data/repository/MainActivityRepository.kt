@@ -22,6 +22,7 @@ class MainActivityRepository @Inject internal constructor(
         val response = asyncApi.getPosts("782323523", 7)/*safeApiCall(
             call = { asyncApi.getPosts("782323523", 7) },
             errorMessage = "Error Fetching Popular Movies")*/
+
         if (response != null) {
             Log.d("JSON", response.result.toString())
         }
