@@ -3,7 +3,7 @@
 # Technology Stack
 
 ## Language  
-1 Kotlin 1.3.61 <br />
+1 Kotlin  1.3.61 <br />
 
 ## Architecture
 1 MVVM  <br />
