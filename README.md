@@ -1,6 +1,6 @@
 # Base For Android Application using Kotlin..
 
-![GitHub Actions status | HaneetGH/KotlinAndroidBase](https://github.com/HaneetGH/KotlinAndroidBase/workflows/Android%20CI/badge.svg)
+![GitHub Actions status | HaneetGH/KotlinAndroidBase](https://github.com/HaneetGH/KotlinAndroidBase/workflows/CI/badge.svg)
 
 # Technology Stack
 
