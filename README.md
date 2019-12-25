@@ -1,5 +1,7 @@
 # Base For Android Application using Kotlin..
 
+![GitHub Actions status | HaneetGH/QuizApp](https://github.com/HaneetGH/KotlinAndroidBase/workflows/Android%20CI/badge.svg)
+
 # Technology Stack
 
 ## Language  
