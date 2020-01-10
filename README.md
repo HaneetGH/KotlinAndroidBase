@@ -2,6 +2,9 @@
 
 ![GitHub Actions status | HaneetGH/KotlinAndroidBase](https://github.com/HaneetGH/KotlinAndroidBase/workflows/CI/badge.svg)
 
+# Artitecture
+<a href="https://ibb.co/Jz3D0M0"><img src="https://i.ibb.co/dQm81z1/1-y-Y0l4-XD3k-Lc-Zz0r-O1sf-RA.png" alt="1-y-Y0l4-XD3k-Lc-Zz0r-O1sf-RA" border="0"></a><br /><br />
+#
 # Technology Stack
 
 ## Language  
