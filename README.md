@@ -1,6 +1,8 @@
 # Base For Android Application using Kotlin..
-An Kotlin MVVM Boilerplate helps you start new enterprise level app in minutes.. 
+
 ![GitHub Actions status | HaneetGH/KotlinAndroidBase](https://github.com/HaneetGH/KotlinAndroidBase/workflows/CI/badge.svg)
+
+An Kotlin MVVM Boilerplate helps you start new enterprise level app in minutes.. 
 
 # Artitecture
 <a href="https://ibb.co/Jz3D0M0"><img src="https://i.ibb.co/dQm81z1/1-y-Y0l4-XD3k-Lc-Zz0r-O1sf-RA.png" alt="1-y-Y0l4-XD3k-Lc-Zz0r-O1sf-RA" border="0"></a><br /><br />
