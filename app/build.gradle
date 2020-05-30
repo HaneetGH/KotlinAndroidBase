@@ -14,7 +14,7 @@ android {
     defaultConfig {
         // Enabling multidex support.
         multiDexEnabled true
-        applicationId "com.bt.wdriver"
+        applicationId "com.technorapper.boiler"
         minSdkVersion 15
         targetSdkVersion 29
         versionCode 1
