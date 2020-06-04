@@ -12,6 +12,7 @@ import com.github.nkzawa.socketio.client.Socket
 import com.squareup.picasso.OkHttp3Downloader
 import com.squareup.picasso.Picasso
 import com.technorapper.boiler.application.App
+import com.technorapper.boiler.data.tunnel.remote.utils.CheckInternetConnection
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
@@ -45,7 +46,17 @@ class AppModule(val application: App) {
     fun provideExampleSocket(app: App): AppSocket {
         return AppSocketServiceFactory.exampleSocket()
     }
+    @Provides
+    @ApplicationScoped
+    fun provideInternetConnection(application: Context): CheckInternetConnection? {
+        return CheckInternetConnection(application)
+    }
 
+    @Provides
+    @ApplicationScoped
+    fun provideApplication(): Application {
+        return application
+    }
 
 
 
