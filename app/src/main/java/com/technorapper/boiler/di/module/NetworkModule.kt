@@ -16,13 +16,11 @@ import com.google.gson.GsonBuilder
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
+import com.technorapper.boiler.data.tunnel.remote.utils.CheckInternetConnection
 import dagger.Module
 import dagger.Provides
 import io.reactivex.schedulers.Schedulers
-import okhttp3.Cache
-import okhttp3.CookieJar
-import okhttp3.Interceptor
-import okhttp3.OkHttpClient
+import okhttp3.*
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
@@ -31,6 +29,7 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 import java.net.CookieHandler
 import java.net.CookieManager
 import java.net.CookiePolicy
+import java.util.concurrent.TimeUnit
 import javax.inject.Named
 
 @Module
@@ -43,18 +42,54 @@ class NetworkModule {
         private val BASE_URL = "http://example.com/api/"
     }
 
-    private val authInterceptor = Interceptor { chain ->
-        val newUrl = chain.request().url()
-            .newBuilder()
-            /* .addQueryParameter("api_key", GlobalVariables.TIME_STAMP_FORMAT)*/
-            .build()
+    @Provides
+    @ApplicationScoped
+    fun provideAuthorizationInterceptor(
+        @Named(TOKEN) token: String, connection: CheckInternetConnection
+    ): Interceptor{
+        return Interceptor { chain ->
 
-        val newRequest = chain.request()
-            .newBuilder()
-            .url(newUrl)
-            .build()
 
-        chain.proceed(newRequest)
+            var request = chain.request()
+
+            val requestBuilder = request.newBuilder()
+            //  .addHeader("Authorization", "Bearer " + token);
+            val cacheControl = CacheControl.Builder()
+                .maxAge(40, TimeUnit.SECONDS)
+                .build()
+
+            if (connection.isNetworkAvailable()) {
+                val maxAge = 20 // read from cache for 1 minute
+                //request.newBuilder()
+                requestBuilder
+                    // .addHeader("Authorization", "Bearer$token")
+
+                    .addHeader(
+                        "Authorization",
+                        "Bearer $token"
+                    )
+                    .addHeader("Content-Type", "application/json")
+                    .header("Cache-Control", "public, max-age=$maxAge")
+                    .cacheControl(cacheControl)
+                    .build()
+            } else {
+                val maxStale = 60 * 60 * 24 * 28 // tolerate 4-weeks stale
+                // request.newBuilder()
+                requestBuilder
+                    .header("Cache-Control", "public, only-if-cached, max-stale=$maxStale")
+                    .build()
+            }
+
+            request = requestBuilder.build()
+
+            val response = chain.proceed(request)
+            if (response.code() == 401) {
+
+                // Expire Token
+                return@Interceptor response
+            }
+            response
+        }
     }
 
     @Provides
@@ -104,10 +139,14 @@ class NetworkModule {
 
     @Provides
     @ApplicationScoped
-    fun okhttpclinet(): OkHttpClient? {
-        return OkHttpClient().newBuilder()
+    fun provideOKHttpClient(loggingInterceptor: HttpLoggingInterceptor,authInterceptor:Interceptor): OkHttpClient {
+        return OkHttpClient.Builder()
+            .readTimeout(1200, TimeUnit.SECONDS)
             .addInterceptor(authInterceptor)
+            .addInterceptor(loggingInterceptor)
+            .connectTimeout(1200, TimeUnit.SECONDS)
             .build()
+
     }
 
     @Provides
