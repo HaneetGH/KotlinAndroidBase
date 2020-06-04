@@ -240,6 +240,7 @@ class NetworkModule {
         return PersistentCookieJar(SetCookieCache(), SharedPrefsCookiePersistor(context))
     }
 
+
     @Provides
     @ApplicationScoped
     fun provideCache(context: Application): Cache? {
