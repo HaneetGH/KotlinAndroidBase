@@ -3,7 +3,7 @@ name: Android_CI
 on:
   push:
     branches:
-      - ui_test
+      - master
 jobs:
   build:
 
