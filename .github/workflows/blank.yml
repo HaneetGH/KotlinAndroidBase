@@ -3,14 +3,14 @@ name: Android_CI
 on:
   push:
     branches:
-      - master
+      - ui_test
 jobs:
   build:
 
     runs-on: macos-latest
     strategy:
       matrix:
-        api-level: [21, 23 ,28]
+        api-level: [28]
         target: [default, google_apis]
     steps:
       - uses: actions/checkout@v1
