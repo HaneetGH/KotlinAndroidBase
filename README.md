@@ -43,5 +43,12 @@ An Kotlin MVVM Boilerplate helps you start new enterprise level app in minutes..
 1 Timber 4.7.1 <br />
 
 
+## UI Test
+1 Espresso <br />
+
+
+
+
+
 
 
