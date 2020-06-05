@@ -20,7 +20,7 @@ jobs:
           java-version: 1.8
 
       - name: CHMOD
-        run: bash chmod +x gradlew --stacktrace
+        run: sudo chmod +x gradlew --stacktrace
       - name: Build with Gradle
         run: bash ./gradlew assembleDebug --stacktrace
 
