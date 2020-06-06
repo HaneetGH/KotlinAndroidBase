@@ -13,6 +13,7 @@ import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4ClassRunner::class)
 class MainActivityTest{
+
     @Test
     fun testActivity_inView() {
         val activityScenario = ActivityScenario.launch(MainActivity::class.java)
