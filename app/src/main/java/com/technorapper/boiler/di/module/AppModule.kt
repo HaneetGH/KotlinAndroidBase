@@ -18,45 +18,48 @@ import dagger.Provides
 import okhttp3.OkHttpClient
 import java.net.URISyntaxException
 
-@Module(includes = arrayOf(ViewModelModule::class))
-class AppModule(val application: App) {
+@Module(includes = [ViewModelModule::class])
+open class AppModule(val application: App) {
 
 
     @Provides
     @ApplicationScoped
-    fun picasso(
+    open fun picasso(
         app: App
     ): Picasso {
         return Picasso.Builder(app.applicationContext).loggingEnabled(true).build()
     }
 
     @Provides
-    fun okHttp3Downloader(okHttpClient: OkHttpClient?): OkHttp3Downloader? {
+    open fun okHttp3Downloader(okHttpClient: OkHttpClient?): OkHttp3Downloader? {
         return OkHttp3Downloader(okHttpClient)
     }
 
 
     @Provides
     @ApplicationScoped
-    fun context(): Context {
+    open fun context(): Context {
         return application
     }
+
     @Provides
     @ApplicationScoped
-    fun provideExampleSocket(app: App): AppSocket {
+    open fun provideExampleSocket(app: App): AppSocket {
         return AppSocketServiceFactory.exampleSocket()
     }
+
     @Provides
     @ApplicationScoped
-    fun provideInternetConnection(application: Context): CheckInternetConnection? {
+    open fun provideInternetConnection(application: Context): CheckInternetConnection? {
         return CheckInternetConnection(application)
     }
 
     @Provides
     @ApplicationScoped
-    fun provideApplication(): Application {
+    open fun provideApplication(): Application {
         return application
     }
+
 
 
 

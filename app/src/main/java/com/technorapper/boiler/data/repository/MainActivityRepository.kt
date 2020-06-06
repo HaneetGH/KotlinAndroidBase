@@ -4,9 +4,12 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
+import com.bt.whide.driver.data.models.github.repo.UserRepo
+import com.google.gson.JsonObject
 import com.technorapper.boiler.data.models.response.BasicResponse
 import com.technorapper.boiler.data.tunnel.remote.SynchronousApi
 import com.technorapper.boiler.di.scopes.ApplicationScoped
+import io.reactivex.Flowable
 import retrofit2.await
 import javax.inject.Inject
 
@@ -54,6 +57,12 @@ class MainActivityRepository @Inject internal constructor(
 
             }
         }*/
+
+
+    }
+
+    suspend fun getUserRepo(url: String): UserRepo {
+        return asyncApi.getUserRepo(url)
 
 
     }

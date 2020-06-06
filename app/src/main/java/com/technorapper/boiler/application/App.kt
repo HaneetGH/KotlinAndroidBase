@@ -3,6 +3,7 @@
 package com.technorapper.boiler.application
 
 import android.app.Activity
+import android.app.Application
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.multidex.MultiDexApplication
@@ -22,7 +23,7 @@ import dagger.android.HasActivityInjector
 import dagger.android.support.HasSupportFragmentInjector
 import javax.inject.Inject
 
-class App : MultiDexApplication(), HasActivityInjector, HasSupportFragmentInjector {
+ open class App : Application(), HasActivityInjector, HasSupportFragmentInjector {
     @Inject
     lateinit var appComponent: AppComponent
 
@@ -39,11 +40,8 @@ class App : MultiDexApplication(), HasActivityInjector, HasSupportFragmentInject
 
     override fun onCreate() {
         super.onCreate()
-        appComponent = DaggerAppComponent.builder()
-            .application(this)
-            ?.appModule(AppModule(this))
-            ?.build()
-        appComponent.inject(this)
+        INSTANCE = this
+        initDagger()
         socket.connect()
         val bindingComponent: BindingComponent? = DaggerBindingComponent.builder()
             ?.bindingModule(BindingModule())
@@ -51,6 +49,14 @@ class App : MultiDexApplication(), HasActivityInjector, HasSupportFragmentInject
             ?.build()
         DataBindingUtil.setDefaultComponent(bindingComponent)
         applyAutoInjector()
+    }
+
+    open fun initDagger() {
+        appComponent = DaggerAppComponent.builder()
+            .application(this)
+            .appModule(AppModule(this))
+            .build()
+        appComponent.inject(this)
     }
 
     override fun activityInjector(): DispatchingAndroidInjector<Activity>? {
@@ -61,5 +67,8 @@ class App : MultiDexApplication(), HasActivityInjector, HasSupportFragmentInject
         return dispatchingFragmentInjector
     }
 
+     companion object {
+         lateinit var INSTANCE: App
+     }
 
 }
