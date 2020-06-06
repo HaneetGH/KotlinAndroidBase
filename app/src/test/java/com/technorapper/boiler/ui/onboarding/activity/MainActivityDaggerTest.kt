@@ -39,7 +39,7 @@ class MainActivityDaggerTest {
         assertNotNull(appAPIs)
         assertNotNull(viewModel)
 
-        viewModel.getTestApi()
+        //viewModel.getTestApi()
         viewModel.add(1, 2)
         GlobalScope.launch {
             viewModel.response.observeForever { t: Int? ->
