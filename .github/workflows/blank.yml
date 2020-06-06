@@ -38,6 +38,7 @@ jobs:
           profile: Nexus 6
           script: ./gradlew connectedCheck --stacktrace
 
-
+      - name: TEST 2
+        run: ./gradlew test --stacktrace
 
 
