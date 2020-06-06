@@ -3,7 +3,7 @@ name: Android_CI
 on:
   push:
     branches:
-      - haneet_dev
+      - master
 jobs:
   build:
 
