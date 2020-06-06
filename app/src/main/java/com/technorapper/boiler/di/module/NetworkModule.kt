@@ -22,7 +22,9 @@ import okhttp3.*
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
+import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.converter.moshi.MoshiConverterFactory
+import retrofit2.converter.scalars.ScalarsConverterFactory
 import java.net.CookieHandler
 import java.net.CookieManager
 import java.net.CookiePolicy
@@ -42,7 +44,8 @@ class NetworkModule {
         private const val TIMEOUT_IN_MS = 30000
         private const val LT_BASE_URL = "lt_base_url"
         private const val TOKEN = "token"
-        private val BASE_URL = "http://example.com/api/"
+
+        private val BASE_URL = "https://api.github.com/"
     }
 
     @Provides
@@ -220,8 +223,9 @@ class NetworkModule {
     @ApplicationScoped
     fun provideexampleService(@Named(LT_BASE_URL) baseUrl: String): SynchronousApi {
         return Retrofit.Builder().baseUrl(baseUrl)
-            .addConverterFactory(MoshiConverterFactory.create())
+            .addConverterFactory(GsonConverterFactory.create())
             .addCallAdapterFactory(RxJava2CallAdapterFactory.createWithScheduler(Schedulers.io()))
+            .addConverterFactory(ScalarsConverterFactory.create())
             .build().create(SynchronousApi::class.java)
     }
 
