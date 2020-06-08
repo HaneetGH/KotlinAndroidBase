@@ -36,7 +36,7 @@ interface TestAppComponent : AndroidInjector<DaggerApplication> {
         fun application(application: App): Builder
 
         fun appModule(appModule: AppModule): Builder
-
+        fun appPrefs(appPref: PreferenceModule): Builder
         fun build(): TestAppComponent
     }
 }

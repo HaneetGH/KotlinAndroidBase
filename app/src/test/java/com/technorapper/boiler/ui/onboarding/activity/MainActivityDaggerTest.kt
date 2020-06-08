@@ -5,6 +5,7 @@ import androidx.lifecycle.Observer
 import com.squareup.picasso.Picasso
 import com.technorapper.boiler.application.App
 import com.technorapper.boiler.di.module.AppModule
+import com.technorapper.boiler.helpers.AppPrefs
 import io.mockk.every
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -24,12 +25,14 @@ class MainActivityDaggerTest {
 
     @Inject
     lateinit var viewModel: MainActivityViewModel
-
+    @Inject
+    lateinit var prefs: AppPrefs
     @Before
     fun setUp() {
         val component = DaggerTestAppComponent.builder()
             .application(App())
             .appModule(TestApplicationModule(App()))
+            .appPrefs(TestPrefModule())
             .build()
         component.into(this)
     }
