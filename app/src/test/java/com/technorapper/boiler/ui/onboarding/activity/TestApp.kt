@@ -1,4 +1,6 @@
 package com.technorapper.boiler.ui.onboarding.activity
 
-class TestApp {
+import com.technorapper.boiler.application.App
+
+class TestApp : App() {
 }
