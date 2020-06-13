@@ -4,8 +4,8 @@ import android.content.SharedPreferences
 import javax.inject.Inject
 
 class AppPrefs @Inject constructor(private val pref: SharedPreferences?) {
-    var IS_LOGIN = "is_login"
-    var TOKEN_ = "user_token"
+   private var IS_LOGIN = "is_login"
+    private var TOKEN_ = "user_token"
 
     var isLogin: Boolean
         get() = pref!!.getBoolean(IS_LOGIN, false)
