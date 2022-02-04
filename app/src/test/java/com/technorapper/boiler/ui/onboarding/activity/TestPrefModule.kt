@@ -17,7 +17,7 @@ import okhttp3.OkHttpClient
 class TestPrefModule() : PreferenceModule()
 {
 
-    override fun provideLetstrackPreference(preferences: SharedPreferences?): AppPrefs = mockk()
+    override fun provideTechnorapperPreference(preferences: SharedPreferences?): AppPrefs = mockk()
 
     override fun providePreferences(context: App): SharedPreferences = mockk()
 }

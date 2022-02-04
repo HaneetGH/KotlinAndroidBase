@@ -1,4 +1,4 @@
-package com.bt.whide.driver.data.models.github.repo
+package com.bt.technorapper.driver.data.models.github.repo
 
 data class Owner(
     val avatar_url: String,

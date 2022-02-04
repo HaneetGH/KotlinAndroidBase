@@ -4,7 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
-import com.bt.whide.driver.data.models.github.repo.UserRepo
+import com.bt.technorapper.driver.data.models.github.repo.UserRepo
 import com.google.gson.JsonObject
 import com.technorapper.boiler.data.models.response.BasicResponse
 import com.technorapper.boiler.data.tunnel.remote.SynchronousApi

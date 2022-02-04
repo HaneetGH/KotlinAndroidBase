@@ -16,7 +16,7 @@ import com.technorapper.boiler.data.utils.RoomConverters
     RoomConverters::class
 )
 abstract class exampleDatabase : RoomDatabase() {
-    //  private static LetstrackDatabase letstrackDB;
+    //  private static TechnorapperDatabase TechnorapperDB;
 
     abstract fun getUserMasterDao(): UserMasterDao
 

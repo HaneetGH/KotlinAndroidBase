@@ -16,7 +16,7 @@ open class PreferenceModule {
 
     @Provides
     @ApplicationScoped
-   open fun provideLetstrackPreference(preferences: SharedPreferences?): AppPrefs {
+   open fun provideTechnorapperPreference(preferences: SharedPreferences?): AppPrefs {
         return AppPrefs(preferences)
     }
     

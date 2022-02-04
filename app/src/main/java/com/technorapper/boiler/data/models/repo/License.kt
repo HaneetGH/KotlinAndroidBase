@@ -1,4 +1,4 @@
-package com.bt.whide.driver.data.models.github.repo
+package com.bt.technorapper.driver.data.models.github.repo
 
 data class License(
     val key: String,

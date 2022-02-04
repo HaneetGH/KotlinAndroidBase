@@ -1,6 +1,6 @@
 package com.technorapper.boiler.data.tunnel.remote
 
-import com.bt.whide.driver.data.models.github.repo.UserRepo
+import com.bt.technorapper.driver.data.models.github.repo.UserRepo
 import com.technorapper.boiler.data.models.response.BasicResponse
 import com.google.gson.JsonObject
 import com.technorapper.boiler.data.models.APIResponse
